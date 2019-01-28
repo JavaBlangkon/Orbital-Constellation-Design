@@ -81,7 +81,7 @@ def coe2sv(r_vec,v_vec):
         
     return h, i, omega_capt, e, omega_case, theta
 
-#testing using the r and v value from Orbital Mechanics page 163 Example 4.3
+#testing using the r and v value from Orbital Mechanics page 161 Example 4.3
 r_test = np.array([-6045, -3490, 2500])
 v_test = np.array([-3.457, 6.618, 2.533])
 
