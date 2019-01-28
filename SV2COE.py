@@ -19,7 +19,7 @@ i_unit = np.array([1, 0, 0])
 j_unit = np.array([0, 1, 0])
 k_unit = np.array([0, 0, 1])
 
-#defining function coe2sv for transforming classical orbital elements to state vector
+#defining function sv2coe for transforming state vector to classical orbital elements
 def sv2coe(r_vec,v_vec):
     #Calculating distance from r_vec
     r = np.sqrt(np.dot(r_vec, r_vec))
