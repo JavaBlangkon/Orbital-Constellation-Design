@@ -20,7 +20,7 @@ j_unit = np.array([0, 1, 0])
 k_unit = np.array([0, 0, 1])
 
 #defining function coe2sv for transforming classical orbital elements to state vector
-def coe2sv(r_vec,v_vec):
+def sv2coe(r_vec,v_vec):
     #Calculating distance from r_vec
     r = np.sqrt(np.dot(r_vec, r_vec))
     #Calculating speed from v_vec
@@ -87,7 +87,7 @@ def coe2sv(r_vec,v_vec):
 r_test = np.array([-6045, -3490, 2500])
 v_test = np.array([-3.457, 6.618, 2.533])
 
-a, h, i, omega_capt, e, omega_case, theta = coe2sv(r_test, v_test)
+a, h, i, omega_capt, e, omega_case, theta = sv2coe(r_test, v_test)
 
 print("")
 print("The semi major axis is ", np.absolute(a), u.km)
