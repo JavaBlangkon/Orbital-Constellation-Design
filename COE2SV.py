@@ -89,6 +89,15 @@ v_test = np.array([-3.457, 6.618, 2.533])
 
 a, h, i, omega_capt, e, omega_case, theta = coe2sv(r_test, v_test)
 
+print("")
+print("The semi major axis is ", np.absolute(a), "km")
+print("The inclination is ", i, "degree")
+print("The eccentricity is ", e)
+print("The right ascension of ascending node is ", omega_capt, "degree")
+print("The argument of perigee is ", omega_case, "degree")
+print("The true anomaly is ", theta, "degree")
+print("")
+
 print(a, h, i, omega_capt, e, omega_case, theta)
 print(miu) #need more explanation on this, since the value in the book is different from real calculation assumption
 
