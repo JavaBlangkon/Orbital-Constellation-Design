@@ -58,6 +58,8 @@ def coe2sv(r_vec,v_vec):
     e_vec = (1/miu)*(np.dot((v**2 - (miu/r)), r_vec) - (np.dot((r*v_rad), v_vec)))
     #Calculating magnitude of eccentricity
     e = np.sqrt(np.dot(e_vec, e_vec)) #fourth orbital element
+    #Calculating semi major axis
+    a = -miu/(2*e)
     #Calculating argument of perigee
     if e_vec[2] >= 0:
         omega_case = np.arccos((np.dot(N_vec, e_vec)/(N*e)))
@@ -79,15 +81,15 @@ def coe2sv(r_vec,v_vec):
     else:
         print("True anomaly of perigee is in second or third quadrant")
         
-    return h, i, omega_capt, e, omega_case, theta
+    return a, h, i, omega_capt, e, omega_case, theta
 
 #testing using the r and v value from Orbital Mechanics page 161 Example 4.3
 r_test = np.array([-6045, -3490, 2500])
 v_test = np.array([-3.457, 6.618, 2.533])
 
-h, i, omega_capt, e, omega_case, theta = coe2sv(r_test, v_test)
+a, h, i, omega_capt, e, omega_case, theta = coe2sv(r_test, v_test)
 
-print(h, i, omega_capt, e, omega_case, theta)
+print(a, h, i, omega_capt, e, omega_case, theta)
 print(miu) #need more explanation on this, since the value in the book is different from real calculation assumption
 
 
