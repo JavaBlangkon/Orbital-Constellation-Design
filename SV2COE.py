@@ -81,8 +81,8 @@ def sv2coe(r_vec,v_vec):
     else:
         print("True anomaly of perigee is in second or third quadrant")
     #Calculating mean anomaly
-    MA = EA - e*np.sin(EA)
-    MA = MA*180/np.pi
+    #MA = EA - e*np.sin(EA)
+    #MA = MA*180/np.pi
     #Calculationg radius of perigee and radius of apogee
     rp = (h**2/miu)*(1/(1+e*np.cos(0)))
     ra = (h**2/miu)*(1/(1+e*np.cos(np.pi)))
