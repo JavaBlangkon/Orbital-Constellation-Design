@@ -70,6 +70,8 @@ def sv2coe(r_vec,v_vec):
         print("Argument of perigee is in first or fourth quadrant")
     else:
         print("Argument of perigee is in second or third quadrant")
+    #Calculating eccentric anomaly
+    EA = np.arctan2(np.sqrt((a*(1-e**2))/miu) * np.dot(r_vec,v_vec), (a*(1-e**2))-r)
     #Calculating true anomaly
     if v_rad >= 0:
         theta = np.arccos((np.dot(e_vec, r_vec)/(e*r)))
@@ -80,6 +82,11 @@ def sv2coe(r_vec,v_vec):
         print("True anomaly is in first or fourth quadrant")
     else:
         print("True anomaly of perigee is in second or third quadrant")
+    #Calculating mean anomaly
+    MA = EA - e*np.sin(EA)
+    MA = MA*180/np.pi
+    #Calculating mean motion
+    n = np.sqrt(miu/(a**3))
         
     return a, h, i, omega_capt, e, omega_case, theta
 
