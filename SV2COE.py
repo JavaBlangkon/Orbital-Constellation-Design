@@ -58,8 +58,6 @@ def sv2coe(r_vec,v_vec):
     e_vec = (1/miu)*(np.dot((v**2 - (miu/r)), r_vec) - (np.dot((r*v_rad), v_vec)))
     #Calculating magnitude of eccentricity
     e = np.sqrt(np.dot(e_vec, e_vec)) #fourth orbital element
-    #Calculating semi major axis
-    a = -miu/(2*e)
     #Calculating argument of perigee
     if e_vec[2] >= 0:
         omega_case = np.arccos((np.dot(N_vec, e_vec)/(N*e)))
@@ -71,7 +69,7 @@ def sv2coe(r_vec,v_vec):
     else:
         print("Argument of perigee is in second or third quadrant")
     #Calculating eccentric anomaly
-    EA = np.arctan2(np.sqrt((a*(1-e**2))/miu) * np.dot(r_vec,v_vec), (a*(1-e**2))-r)
+    #EA = np.arctan2(np.sqrt((a*(1-e**2))/miu) * np.dot(r_vec,v_vec), (a*(1-e**2))-r)
     #Calculating true anomaly
     if v_rad >= 0:
         theta = np.arccos((np.dot(e_vec, r_vec)/(e*r)))
@@ -85,16 +83,24 @@ def sv2coe(r_vec,v_vec):
     #Calculating mean anomaly
     MA = EA - e*np.sin(EA)
     MA = MA*180/np.pi
+    #Calculationg radius of perigee and radius of apogee
+    rp = (h**2/miu)*(1/(1+e*np.cos(0)))
+    ra = (h**2/miu)*(1/(1+e*np.cos(np.pi)))
+    #Calculating semi major axis
+    a = 0.5*(rp+ra)
     #Calculating mean motion
     n = np.sqrt(miu/(a**3))
+    #Calculating period of an orbit
+    T = (2*np.pi)/n
+    T = T/3600
         
-    return a, h, i, omega_capt, e, omega_case, theta
+    return a, h, i, omega_capt, e, omega_case, theta, rp, ra, T
 
 #testing using the r and v value from Orbital Mechanics page 161 Example 4.3
 r_test = np.array([-6045, -3490, 2500])
 v_test = np.array([-3.457, 6.618, 2.533])
 
-a, h, i, omega_capt, e, omega_case, theta = sv2coe(r_test, v_test)
+a, h, i, omega_capt, e, omega_case, theta, rp, ra, T = sv2coe(r_test, v_test)
 
 print("")
 print("The semi major axis is ", np.absolute(a), u.km)
@@ -105,9 +111,7 @@ print("The argument of perigee is ", omega_case, u.degree)
 print("The true anomaly is ", theta, u.degree)
 print("")
 
-print(a, h, i, omega_capt, e, omega_case, theta)
-print(miu) #need more explanation on this, since the value in the book is different from real calculation assumption
-
+print(a, h, i, omega_capt, e, omega_case, theta, rp, ra, T)
 
 # In[ ]:
 
