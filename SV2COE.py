@@ -11,7 +11,7 @@ from astropy import units as u
 import numpy as np
 
 #declaring value of miu and radius of earth
-miu = (G.value*M_earth.value)*10**(-9)
+miu = (G.value * M_earth.value) * 10**(-9)
 Re = R_earth.value
 
 #declaring unit vector
@@ -20,13 +20,13 @@ j_unit = np.array([0, 1, 0])
 k_unit = np.array([0, 0, 1])
 
 #defining function sv2coe for transforming state vector to classical orbital elements
-def sv2coe(r_vec,v_vec):
+def sv2coe(r_vec, v_vec):
     #Calculating distance from r_vec
     r = np.sqrt(np.dot(r_vec, r_vec))
     #Calculating speed from v_vec
     v = np.sqrt(np.dot(v_vec, v_vec))
     #Calculating radial velocity
-    v_rad = (np.dot(r_vec, v_vec))/r
+    v_rad = (np.dot(r_vec, v_vec)) / r
     if v_rad > 0:
         print("Satellite is flying away from perigee")
     else:
@@ -36,7 +36,7 @@ def sv2coe(r_vec,v_vec):
     #Calculating magnitude of specific angular momentum
     h = np.sqrt(np.dot(h_vec, h_vec)) #first orbital element
     #Calculating inclination
-    i = np.arccos(h_vec[2]/h) 
+    i = np.arccos(h_vec[2] / h) 
     i = i*180/np.pi #second orbital element
     if i <= 90:
         print("The orbit is retrograde")
@@ -50,49 +50,49 @@ def sv2coe(r_vec,v_vec):
     N = np.sqrt(np.dot(N_vec, N_vec))
     #Calculating right ascencion of the ascending node
     if N_vec[1] >= 0:
-        omega_capt = np.arccos(N_vec[0]/N)
+        omega_capt = np.arccos(N_vec[0] / N)
     else:
-        omega_capt = 2*np.pi - np.arccos(N_vec[0]/N) 
-    omega_capt = omega_capt*180/np.pi #third orbital element
+        omega_capt = 2 * np.pi - np.arccos(N_vec[0] / N) 
+    omega_capt = omega_capt * 180 / np.pi #third orbital element
     #Calculating eccentricity vector
-    e_vec = (1/miu)*(np.dot((v**2 - (miu/r)), r_vec) - (np.dot((r*v_rad), v_vec)))
+    e_vec = (1 / miu) * (np.dot((v**2 - (miu / r)), r_vec) - (np.dot((r * v_rad), v_vec)))
     #Calculating magnitude of eccentricity
     e = np.sqrt(np.dot(e_vec, e_vec)) #fourth orbital element
     #Calculating argument of perigee
     if e_vec[2] >= 0:
-        omega_case = np.arccos((np.dot(N_vec, e_vec)/(N*e)))
+        omega_case = np.arccos((np.dot(N_vec, e_vec)/(N * e)))
     else:
-        omega_case = 2*np.pi - np.arccos((np.dot(N_vec, e_vec)/(N*e))) 
-    omega_case = omega_case*180/np.pi #fifth orbital element
+        omega_case = 2 * np.pi - np.arccos((np.dot(N_vec, e_vec)/(N * e))) 
+    omega_case = omega_case * 180 / np.pi #fifth orbital element
     if np.dot(N_vec, e_vec) > 0:
         print("Argument of perigee is in first or fourth quadrant")
     else:
         print("Argument of perigee is in second or third quadrant")
     #Calculating eccentric anomaly
-    #EA = np.arctan2(np.sqrt((a*(1-e**2))/miu) * np.dot(r_vec,v_vec), (a*(1-e**2))-r)
+    #EA = np.arctan2(np.sqrt((a * (1 - e**2)) / miu) * np.dot(r_vec, v_vec), (a * (1 - e**2)) - r)
     #Calculating true anomaly
     if v_rad >= 0:
-        theta = np.arccos((np.dot(e_vec, r_vec)/(e*r)))
+        theta = np.arccos((np.dot(e_vec, r_vec)/(e * r)))
     else:
-        theta = 2*np.pi - np.arccos((np.dot(e_vec, r_vec)/(e*r))) 
-    theta = theta*180/np.pi #sixth orbital element
+        theta = 2 * np.pi - np.arccos((np.dot(e_vec, r_vec)/(e * r))) 
+    theta = theta * 180 / np.pi #sixth orbital element
     if np.dot(e_vec, r_vec) > 0:
         print("True anomaly is in first or fourth quadrant")
     else:
         print("True anomaly of perigee is in second or third quadrant")
     #Calculating mean anomaly
-    #MA = EA - e*np.sin(EA)
-    #MA = MA*180/np.pi
+    #MA = EA - e * np.sin(EA)
+    #MA = MA  *180 / np.pi
     #Calculationg radius of perigee and radius of apogee
-    rp = (h**2/miu)*(1/(1+e*np.cos(0)))
-    ra = (h**2/miu)*(1/(1+e*np.cos(np.pi)))
+    rp = (h**2 / miu) * (1 / (1 + e * np.cos(0)))
+    ra = (h**2 / miu) * (1 / (1 + e * np.cos(np.pi)))
     #Calculating semi major axis
-    a = 0.5*(rp+ra)
+    a = 0.5 * (rp + ra)
     #Calculating mean motion
-    n = np.sqrt(miu/(a**3))
+    n = np.sqrt(miu / (a**3))
     #Calculating period of an orbit
-    T = (2*np.pi)/n
-    T = T/3600
+    T = (2 * np.pi) / n
+    T = T / 3600
         
     return a, h, i, omega_capt, e, omega_case, theta, rp, ra, T
 
