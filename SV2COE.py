@@ -4,15 +4,14 @@
 # In[23]:
 
 
-#astropy is a python library for astronomy
-#G for gravitational constant, M_earth for mass of earth, R_earth for radius of earth
-from astropy.constants import G, M_earth, R_earth
-from astropy import units as u
 import numpy as np
 
-#declaring value of miu and radius of earth
-miu = (G.value * M_earth.value) * 10**(-9)
-Re = R_earth.value
+#G_const for gravitational constant, ME for mass of earth, RE for radius of earth
+G_const = 6.67408 * 10**(-11)
+ME = 5.972364730419773 * 10**24
+RE = 6378100
+#Declaring value of miu
+miu = (G_const * ME) * 10**(-9)
 
 #declaring unit vector
 i_unit = np.array([1, 0, 0])
