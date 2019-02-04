@@ -120,13 +120,13 @@ def sv2coe(r_vec, v_vec):
     T = (2 * np.pi) / n
     T = T / 3600
         
-    return a, h, i, omega_capt, e, omega_case, theta, rp, ra, T
+    return r, v, v_rad, h_vec, N_vec, N, a, h, i, omega_capt, e_vec, e, omega_case, theta, rp, ra, n, T
 
 #testing using the r and v value from Orbital Mechanics page 161 Example 4.3
 r_test = np.array([-6045, -3490, 2500])
 v_test = np.array([-3.457, 6.618, 2.533])
 
-a, h, i, omega_capt, e, omega_case, theta, rp, ra, T = sv2coe(r_test, v_test)
+r, v, v_rad, h_vec, N_vec, N, a, h, i, omega_capt, e_vec, e, omega_case, theta, rp, ra, n, T = sv2coe(r_test, v_test)
 
 print("")
 print("The semi major axis is ", np.absolute(a), u.km)
