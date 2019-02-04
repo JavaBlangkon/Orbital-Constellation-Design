@@ -4,3 +4,5 @@ a thesis project to design low earth micro-satellites constellation for Air Traf
 SV2COE.py file consist code program to transform given state vector into classical orbital elements
 
 COE2SV.py file consist code program to transform given classical orbital elements into state vector
+
+twoBodyTool.py is a library tool consist the combination of function sv2coe, coe2sv, and derivative function F for the second ode integral function analysis
