@@ -4,15 +4,14 @@
 # In[1]:
 
 
-#astropy is a python library for astronomy
-#G for gravitational constant, M_earth for mass of earth, R_earth for radius of earth
-from astropy.constants import G, M_earth, R_earth
-from astropy import units as u
 import numpy as np
 
-#declaring value of miu and radius of earth
-miu = (G.value * M_earth.value) * 10**(-9)
-Re = R_earth.value
+#G_const for gravitational constant, ME for mass of earth, RE for radius of earth
+G_const = 6.67408 * 10**(-11)
+ME = 5.972364730419773 * 10**24
+RE = 6378100
+#Declaring value of miu
+miu = (G_const * ME) * 10**(-9)
 
 # defining function coe2sv(h, i, omega_capt, e, omega_case, theta) for transforming state vector to classical orbital elements
 # in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
@@ -64,8 +63,8 @@ theta = 30 * np.pi / 180
 
 Q_geo, r_peri, v_peri, r_geo, v_geo = coe2sv(h, i, omega_capt, e, omega_case, theta)
 
-print("The geocentric equatorial position vector is", r_geo, u.km)
-print("The geocentric equatorial velocity vector is", v_geo, u.km/u.s)
+print("The geocentric equatorial position vector is", r_geo, "km")
+print("The geocentric equatorial velocity vector is", v_geo, "km/s")
 
 
 # In[ ]:
