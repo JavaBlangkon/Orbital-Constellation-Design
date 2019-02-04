@@ -14,7 +14,24 @@ import numpy as np
 miu = (G.value * M_earth.value) * 10**(-9)
 Re = R_earth.value
 
-#defining function coe2sv for transforming classical orbital elements to state vector
+# defining function coe2sv(h, i, omega_capt, e, omega_case, theta) for transforming state vector to classical orbital elements
+# in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
+# the input element of the function sv2coe that need to be defined consists of:
+#   h = the magnitude of specific angular momentum (in km^2/s)
+#   i = the magnitude of inclination (in degree)
+#   omega_capt = the magnitude of right ascencion of the ascending node (in degree)
+#   e = the magnitude of eccentricity (no unit)
+#   omega_case = the magnitude of argument of perigee (in degree)
+#   theta = the magnitude of true anomaly (in degree)
+#   all the inputs should be in the correct unit
+# 
+# the possible output of this function are as follows:
+#   r_peri = the position vector in perifocal coordinates (in km)
+#   v_peri = the velocity vector in perifocal coordinates (in km/s)
+#   Q_geo = the matrix Q_geo transformation from perifocal to geocentric equatorial coordinates (no unit)
+#   r_geo = the position vector in geocentric frame (in km)
+#   v_geo = the velocity vector in geocentric frame (in km/s)
+
 def coe2sv(h, i, omega_capt, e, omega_case, theta):
     #Calculating position vector in perifocal coordinates
     r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([[np.cos(theta)], [np.sin(theta)], [0]])
