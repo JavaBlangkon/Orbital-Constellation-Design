@@ -19,7 +19,33 @@ i_unit = np.array([1, 0, 0])
 j_unit = np.array([0, 1, 0])
 k_unit = np.array([0, 0, 1])
 
-#defining function sv2coe for transforming state vector to classical orbital elements
+# defining function sv2coe(r_vec, v_vec) for transforming state vector to classical orbital elements
+# in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
+# the input element of the function sv2coe consists of:
+#   r_vec is position vector of the satellite
+#   v_vec is velocity vector of the satellite
+#   all the input vector should be in 3x1 matrix
+# 
+# the possible output of this function are as follows:
+#   r = the magnitude of position vector (in km)
+#   v = the magnitude of velocity vector (in km/s)
+#   v_rad = the radial velocity (in km/s)
+#   h_vec = the specific angular momentum vector (in km^2/s)
+#   h = the magnitude of specific angular momentum (in km^2/s)
+#   i = the magnitude of inclination (in degree)
+#   N_vec = the node line vector (no unit)
+#   N = the magnitude of node line (no unit)
+#   omega_capt = the magnitude of right ascencion of the ascending node (in degree)
+#   e_vec = the eccentricity vector (no unit)
+#   e = the magnitude of eccentricity (no unit)
+#   omega_case = the magnitude of argument of perigee (in degree)
+#   theta = the magnitude of true anomaly (in degree)
+#   rp = the magnitude of radius of perigee (in km)
+#   ra = the magnitude of radius of apogee (in km)
+#   a = the magnitude of semimajor axis (in km)
+#   n = the magnitude of mean motion (no unit)
+#   T = the magnitude of period the orbit (in second)
+
 def sv2coe(r_vec, v_vec):
     #Calculating distance from r_vec
     r = np.sqrt(np.dot(r_vec, r_vec))
