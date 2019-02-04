@@ -37,7 +37,6 @@ k_unit = np.array([0, 0, 1])
 # all the output will be in form of output array
 # The output of the function needs to be recalled as an array function of 
 # [lists of desired output] = sv2coe(position vetor, velocity vector)
-
 def sv2coe(r_vec, v_vec):
     #Calculating distance from r_vec
     r = np.sqrt(np.dot(r_vec, r_vec))
@@ -134,7 +133,6 @@ def sv2coe(r_vec, v_vec):
 # all the output will be in form of output array
 # The output of the function needs to be recalled as an array function of 
 # [lists of desired output] = coe2sv(h, i, omega_capt, e, omega_case, theta)
-
 def coe2sv(h, i, omega_capt, e, omega_case, theta):
     #Calculating position vector in perifocal coordinates
     r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([[np.cos(theta)], [np.sin(theta)], [0]])
@@ -178,7 +176,6 @@ from scipy.integrate import odeint
 #   vz0 = Initial velocity in z axis
 # The solution of the derivative function will be using odeint() function, where will be declared as:
 # solution = odeint(F,[x0,y0,z0,vx0,vy0,vz0],t)
-
 def F(s,t):
     a = -miu*s[0]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2)
     b = -miu*s[1]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2)
@@ -203,7 +200,6 @@ def F(s,t):
 #    plt.plot(y1,x1, '.')
 #    plt.axis('equal')
 #    plt.show()
-
 
 # In[ ]:
 
