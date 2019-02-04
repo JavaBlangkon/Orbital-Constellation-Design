@@ -21,7 +21,7 @@ k_unit = np.array([0, 0, 1])
 
 # defining function sv2coe(r_vec, v_vec) for transforming state vector to classical orbital elements
 # in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
-# the input element of the function sv2coe consists of:
+# the input element of the function sv2coe that need to be defined consists of:
 #   r_vec is position vector of the satellite
 #   v_vec is velocity vector of the satellite
 #   all the input vector should be in 3x1 matrix
