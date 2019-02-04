@@ -43,7 +43,7 @@ k_unit = np.array([0, 0, 1])
 #   ra = the magnitude of radius of apogee (in km)
 #   a = the magnitude of semimajor axis (in km)
 #   n = the magnitude of mean motion (no unit)
-#   T = the magnitude of period the orbit (in second)
+#   T = the magnitude of period the orbit (in hour)
 
 def sv2coe(r_vec, v_vec):
     #Calculating distance from r_vec
