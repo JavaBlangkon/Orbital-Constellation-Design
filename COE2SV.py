@@ -30,7 +30,6 @@ miu = (G_const * ME) * 10**(-9)
 #   Q_geo = the matrix Q_geo transformation from perifocal to geocentric equatorial coordinates (no unit)
 #   r_geo = the position vector in geocentric frame (in km)
 #   v_geo = the velocity vector in geocentric frame (in km/s)
-
 def coe2sv(h, i, omega_capt, e, omega_case, theta):
     #Calculating position vector in perifocal coordinates
     r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([[np.cos(theta)], [np.sin(theta)], [0]])
