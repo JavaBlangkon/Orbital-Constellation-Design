@@ -39,9 +39,13 @@ import matplotlib.pyplot as plt
 x1 = results[:,0]
 y1 = t1
 plt.plot(y1,x1, '.')
-plt.axis('equal')
+plt.grid(True)
+plt.xlabel("Period of orbit (in second)")
+plt.ylabel("Semimajor axis value")
+plt.title("Variation of Semimajor Axis value for each period of orbital time")
+plt.ylim((8785, 8790))
+plt.xticks(np.arange(0, 8200, 400))
 plt.show()
-
 
 # In[ ]:
 
