@@ -38,13 +38,71 @@ results = np.array(results)
 import matplotlib.pyplot as plt
 x1 = results[:,0]
 y1 = t1
+plt.subplot(3, 2, 1)
 plt.plot(y1,x1, '.')
 plt.grid(True)
-plt.xlabel("Period of orbit (in second)")
-plt.ylabel("Semimajor axis value")
-plt.title("Variation of Semimajor Axis value for each period of orbital time")
+plt.xlabel("Time (in second)")
+plt.ylabel("a", rotation=0)
+plt.title("Variation of Semimajor Axis value for one orbital period")
 plt.ylim((8785, 8790))
-plt.xticks(np.arange(0, 8200, 400))
+plt.xticks(np.arange(0, 8200, 1000))
+
+x2 = results[:,1]
+y2 = t1
+plt.subplot(3, 2, 2)
+plt.plot(y2,x2, '.', color='green')
+plt.grid(True)
+plt.xlabel("Time (in second)")
+plt.ylabel("i", rotation=0)
+plt.title("Variation of Inclination of orbit for one orbital period")
+plt.ylim((150, 155))
+plt.xticks(np.arange(0, 8200, 1000))
+
+x3 = results[:,2]
+y3 = t1
+plt.subplot(3, 2, 3)
+plt.plot(y3,x3, '.', color='yellow')
+plt.grid(True)
+plt.xlabel("Time (in second)")
+plt.ylabel(r'$\Omega$', rotation=0)
+plt.title("Variation of Right ascencion of the ascending node for one orbital period")
+plt.ylim((255, 256))
+plt.xticks(np.arange(0, 8200, 1000))
+
+x4 = results[:,3]
+y4 = t1
+plt.subplot(3, 2, 4)
+plt.plot(y4,x4, '.', color='brown')
+plt.grid(True)
+plt.xlabel("Time (in second)")
+plt.ylabel("e", rotation=0)
+plt.title("Variation of Eccentricity for one orbital period")
+plt.ylim((0, 0.3))
+#plt.axis('equal')
+plt.xticks(np.arange(0, 8200, 1000))
+
+x5 = results[:,4]
+y5 = t1
+plt.subplot(3, 2, 5)
+plt.plot(y5,x5, '.', color='orange')
+plt.grid(True)
+plt.xlabel("Time (in second)")
+plt.ylabel(r'$\omega$', rotation=0)
+plt.title("Variation of Argument of perigee for one orbital period")
+plt.ylim((10, 25))
+plt.xticks(np.arange(0, 8200, 1000))
+
+x6 = results[:,5]
+y6 = t1
+plt.subplot(3, 2, 6)
+plt.plot(y6,x6, '.', color='pink')
+plt.grid(True)
+plt.xlabel("Time (in second)")
+plt.ylabel(r'$\theta$', rotation=0)
+plt.title("Variation of True Anomaly for one orbital period")
+#plt.ylim((10, 35))
+plt.subplots_adjust(hspace=0.8, wspace=0.8)
+plt.savefig('coeSimulation.pdf', dpi=600)
 plt.show()
 
 # In[ ]:
