@@ -8,3 +8,5 @@ COE2SV.py file consist code program to transform given classical orbital element
 twoBodyTool.py is a library tool consist the combination of function sv2coe, coe2sv, and derivative function F for the second ode integral function analysis
 
 toolUtilizationExample.py is a code example of how to evaluate the integration of second ode problem as well as how to plot the relationships between orbital elements and the period
+
+perturbationPlotTrial.py is the same method as toolUtilizationExample.py but now we are using the function of gravitational acceleration under perturbation due to J2
