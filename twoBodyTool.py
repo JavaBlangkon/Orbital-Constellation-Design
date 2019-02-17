@@ -12,6 +12,8 @@ ME = 5.972364730419773 * 10**24
 RE = 6378100
 #Declaring value of miu
 miu = (G_const * ME) * 10**(-9)
+#Declaring teh value of perturbation J2
+J2 = 1.082629 * 10**(-3)
 
 #declaring unit vector
 i_unit = np.array([1, 0, 0])
@@ -182,6 +184,26 @@ def F(s,t):
     c = -miu*s[2]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2)
     return [s[3],s[4], s[5], a, b, c]
 
+# In the following definition of orbit propagator derivative function F1 or Perturbation Accelerations due to J2,
+# s is a state vector whose components represent the following:
+#   s[0] = Horizontal or x position
+#   s[1] = Vertical or y position
+#   s[2] = Lateral or z position
+#   s[3] = Horizontal velocity
+#   s[4] = Vertical velocity
+#   s[5] = Lateral velocity
+# while t is the period of the orbit (in second) that needs to be defined more further; t = np.linspace(start,end,interval)
+#
+# The input for the defined derivative function consists of:
+#   x0 = Initial position in x axis
+#   y0 = Initial position in y axis
+#   z0 = Initial position in z axis
+#   vx0 = Initial velocity in x axis
+#   vy0 = Initial velocity in y axis
+#   vz0 = Initial velocity in z axis
+# The solution of the derivative function will be using odeint() function, where will be declared as:
+# solution = odeint(F,[x0,y0,z0,vx0,vy0,vz0],t)
+#
 # Plotting the orbit from orbit propagator
 # 1. Define the period (t) of the orbit in second
 # 2. Declare the solution function using odeint() function
@@ -200,6 +222,13 @@ def F(s,t):
 #    plt.plot(y1,x1, '.')
 #    plt.axis('equal')
 #    plt.show()
+def F1(s,t):
+    Pt = (3/2)*((miu*J2*RE*10**(-3))/(s[0]**2 + s[1]**2 + s[2]**2)**(4/2))
+    r = (s[0]**2 + s[1]**2 + s[2]**2)**(1/2)
+    a = -miu*s[0]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 3*(s[2]**2/r**2))*(s[0]/r))
+    b = -miu*s[1]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 3*(s[2]**2/r**2))*(s[1]/r))
+    c = -miu*s[2]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((3 - 3*(s[2]**2/r**2))*(s[2]/r))
+    return [s[3],s[4], s[5], a, b, c]
 
 # In[ ]:
 
