@@ -10,3 +10,5 @@ twoBodyTool.py is a library tool consist the combination of function sv2coe, coe
 toolUtilizationExample.py is a code example of how to evaluate the integration of second ode problem as well as how to plot the relationships between orbital elements and the period
 
 perturbationPlotTrial.py is the same method as toolUtilizationExample.py but now we are using the function of gravitational acceleration under perturbation due to J2
+
+rateOfChangePerturbation.py is a method to evaluate the rate of change of each classical orbital elements using basic formula of mean orbital elements and compare it with the graph plotted of each classical orbital elements and analyze it using linear regression
