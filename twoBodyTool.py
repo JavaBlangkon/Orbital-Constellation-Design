@@ -230,6 +230,21 @@ def F1(s,t):
     c = -miu*s[2]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((3 - 3*(s[2]**2/r**2))*(s[2]/r))
     return [s[3],s[4], s[5], a, b, c]
 
+# The rate() function is defining the value of the mean classical orbital elements rate of change,
+# the input components of the function is described as following:
+# i = inclination of the orbit (in degree)
+# n = mean motion of the orbit (no unit)
+# p = semi-latus rectum/orbit parameter (no unit)
+#
+# The output components of the function comprises of:
+# omgRate = rate of right ascencion of the ascending node (in degree/second)
+# omgCaseRate = rate of argument of perigee (in degree/second)
+def rate(i, n, p):
+    rateFactor = n*J2*((RE*10**(-3)/p)**2)
+    omgRate = -(3/2)*(rateFactor*np.cos(i*np.pi/180))
+    omgCaseRate = (3/4)*rateFactor*(5*(np.cos(i*np.pi/180)**2)-1)
+    return [omgRate, omgCaseRate]
+
 # In[ ]:
 
 
