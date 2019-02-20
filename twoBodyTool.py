@@ -112,8 +112,9 @@ def sv2coe(r_vec, v_vec):
     #Calculating period of an orbit
     T = (2 * np.pi) / n
     T = T / 3600
-        
-    return [a, i, omega_capt, e, omega_case, theta, h, T]
+    #Calculating semi-latus rectum
+    p = a * (1 - e**2)    
+    return [a, i, omega_capt, e, omega_case, theta, h, T, n, p]
 
 # defining function coe2sv(h, i, omega_capt, e, omega_case, theta) for transforming state vector to classical orbital elements
 # in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
