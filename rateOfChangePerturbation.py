@@ -7,7 +7,7 @@
 import twoBodyTool
 import numpy as np
 from scipy.integrate import odeint
-from twoBodyTool import F, F1, sv2coe, RE, J2, miu
+from twoBodyTool import F, F1, sv2coe, RE, J2, miu, rate
 
 x0 = -6045
 y0 = -3490
@@ -31,10 +31,13 @@ for data in range(0, 100000):
 results1 = np.array(results1)
 
 rateFactor = results1[:1,8]*J2*((RE*10**(-3)/results1[:1,9])**2)
-
 omgRate = -(3/2)*(rateFactor*np.cos(results1[:1,1]*np.pi/180))
 omgCaseRate = (3/4)*rateFactor*(5*(np.cos(results1[:1,1]*np.pi/180)**2)-1)
 
+i = results1[:1,1]
+n = results1[:1,8]
+p = results1[:1,9]
+omgRate, omgCaseRate = rate(i, n, p)
 
 # In[9]:
 
