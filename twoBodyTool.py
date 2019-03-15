@@ -239,8 +239,12 @@ def F1(s,t):
 # p = semi-latus rectum/orbit parameter (no unit)
 #
 # The output components of the function comprises of:
+# semiMajRate = rate of semi major axis (in km/second)
+# eccenRate = rate of eccentricity (no unit)
+# incliRate = rate of inclination (in degree/second)
 # omgRate = rate of right ascencion of the ascending node (in degree/second)
 # omgCaseRate = rate of argument of perigee (in degree/second)
+# meanAnomaly = rate of mean anomaly (in degree/second)
 def rate(i, e, n, p):
     rateFactor = n*J2*((RE*10**(-3)/p)**2)
     semiMajRate = 0
