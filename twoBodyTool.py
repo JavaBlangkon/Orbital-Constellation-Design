@@ -240,11 +240,15 @@ def F1(s,t):
 # The output components of the function comprises of:
 # omgRate = rate of right ascencion of the ascending node (in degree/second)
 # omgCaseRate = rate of argument of perigee (in degree/second)
-def rate(i, n, p):
+def rate(i, e, n, p):
     rateFactor = n*J2*((RE*10**(-3)/p)**2)
+    semiMajRate = 0
+    eccenRate = 0
+    incliRate = 0
     omgRate = -(3/2)*(rateFactor*np.cos(i*np.pi/180))
     omgCaseRate = (3/4)*rateFactor*(5*(np.cos(i*np.pi/180)**2)-1)
-    return [omgRate, omgCaseRate]
+    meanAnomaly = (n + (3/4)*np.sqrt(1-e**2)*rateFactor*(3*(np.cos(i*np.pi/180)**2)-1))
+    return semiMajRate, eccenRate, incliRate, omgRate, omgCaseRate, meanAnomaly
 
 # In[ ]:
 
