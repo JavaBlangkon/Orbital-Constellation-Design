@@ -234,6 +234,7 @@ def F1(s,t):
 # The rate() function is defining the value of the mean classical orbital elements rate of change,
 # the input components of the function is described as following:
 # i = inclination of the orbit (in degree)
+# e = eccentricity of the orbit (no unit)
 # n = mean motion of the orbit (no unit)
 # p = semi-latus rectum/orbit parameter (no unit)
 #
