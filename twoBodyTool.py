@@ -9,7 +9,7 @@ import numpy as np
 #G_const for gravitational constant, ME for mass of earth, RE for radius of earth
 G_const = 6.67408 * 10**(-11)
 ME = 5.972364730419773 * 10**24
-RE = 6378100
+RE = 6378100*10**(-3)
 #Declaring value of miu
 miu = (G_const * ME) * 10**(-9)
 #Declaring teh value of perturbation J2
@@ -113,7 +113,7 @@ def sv2coe(r_vec, v_vec):
     T = (2 * np.pi) / n
     T = T / 3600
     #Calculating semi-latus rectum
-    p = a * (1 - e**2)    
+    p = a * (1 - e**2)
     return [a, i, omega_capt, e, omega_case, theta, h, T, n, p]
 
 # defining function coe2sv(h, i, omega_capt, e, omega_case, theta) for transforming state vector to classical orbital elements
@@ -224,7 +224,7 @@ def F(s,t):
 #    plt.axis('equal')
 #    plt.show()
 def F1(s,t):
-    Pt = (3/2)*(miu*J2*((RE*10**(-3))**2))
+    Pt = (3/2)*(miu*J2*(RE**2))
     r = (s[0]**2 + s[1]**2 + s[2]**2)**(1/2)
     a = -miu*s[0]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[0]/r**5))
     b = -miu*s[1]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[1]/r**5))
@@ -246,7 +246,7 @@ def F1(s,t):
 # omgCaseRate = rate of argument of perigee (in degree/second)
 # meanAnomaly = rate of mean anomaly (in degree/second)
 def rate(i, e, n, p):
-    rateFactor = n*J2*((RE*10**(-3)/p)**2)
+    rateFactor = n*J2*((RE/p)**2)
     semiMajRate = 0
     eccenRate = 0
     incliRate = 0
@@ -254,6 +254,18 @@ def rate(i, e, n, p):
     omgCaseRate = (3/4)*rateFactor*(5*(np.cos(i*np.pi/180)**2)-1)
     meanAnomaly = (n + (3/4)*np.sqrt(1-e**2)*rateFactor*(3*(np.cos(i*np.pi/180)**2)-1))
     return semiMajRate, eccenRate, incliRate, omgRate, omgCaseRate, meanAnomaly
+
+# defining function coverageBelt(altitude, elevAngle) to find the radius of satellite's coverage belt wideness
+# the input element of the following function consists of:
+#    altitude = the altitude of the satellite above sea level (in km)
+#    elevAngle = it is the elevation angle relative from the ground station horizon plane to the satellite (in degree)
+#    all the inputs should be in each correct unit
+#
+# the possible output of this function is as follows:
+# slantRange = the distance from ground station to the satellite, it also defines the radius of satellite coverage belt wideness (in km)
+def coverageBelt(altitude, elevAngle):
+    slantRange = RE*(np.sqrt((((altitude+RE)/RE)**2)-(np.cos(elevAngle*np.pi/180)**2))-np.sin(elevAngle*np.pi/180))
+    return slantRange
 
 # In[ ]:
 
