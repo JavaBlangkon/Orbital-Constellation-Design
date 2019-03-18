@@ -12,3 +12,5 @@ toolUtilizationExample.py is a code example of how to evaluate the integration o
 perturbationPlotTrial.py is the same method as toolUtilizationExample.py but now we are using the function of gravitational acceleration under perturbation due to J2
 
 rateOfChangePerturbation.py is a method to evaluate the rate of change of each classical orbital elements using basic formula of mean orbital elements and compare it with the graph plotted of each classical orbital elements and analyze it using linear regression
+
+coverageBelt.py is a method to calculate and estimating the coverage belt radius wideness of the satellite, the calculation depends strongly on orbital altitude and elevation angle
