@@ -265,7 +265,13 @@ def rate(i, e, n, p):
 # slantRange = the distance from ground station to the satellite, it also defines the radius of satellite coverage belt wideness (in km)
 def coverageBelt(altitude, elevAngle):
     slantRange = RE*(np.sqrt((((altitude+RE)/RE)**2)-(np.cos(elevAngle*np.pi/180)**2))-np.sin(elevAngle*np.pi/180))
-    return slantRange
+    nadirAngle = np.arcsin((RE/(altitude+RE))*np.cos(elevAngle*np.pi/180))
+    nadirAngle = nadirAngle*180/np.pi
+    centralAngle = 90 - elevAngle - nadirAngle
+    coverageArea = 2*np.pi*(RE**2)*(1-np.cos(centralAngle*np.pi/180))
+    earthArea = 4*np.pi*RE**2
+    coverPercent = (coverageArea/earthArea)*100
+    return slantRange, nadirAngle, centralAngle, coverageArea, coverPercent
 
 # In[ ]:
 
