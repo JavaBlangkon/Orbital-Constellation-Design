@@ -6,13 +6,10 @@
 
 import twoBodyTool
 from scipy.integrate import odeint
+import numpy as np
 from twoBodyTool import F, F1, sv2coe, RE, J2, miu, rate, coverageBelt
 
-result = coverageBelt(600, 2)
+A = np.array([600, 700, 800, 900, 1000])
+B = np.array([8, 8, 8, 8, 8])
 
-
-# In[8]:
-
-
-result*2
-
+slantRange, nadirAngle, centralAngle, coverageArea, coverPercent = coverageBelt(A, B)
