@@ -136,7 +136,8 @@ def sv2coe(r_vec, v_vec):
 # all the output will be in form of output array
 # The output of the function needs to be recalled as an array function of 
 # [lists of desired output] = coe2sv(h, i, omega_capt, e, omega_case, theta)
-def coe2sv(h, i, omega_capt, e, omega_case, theta):
+def coe2sv(a, i, omega_capt, e, omega_case, theta):
+    h = np.sqrt(a * miu * (1 - e**2))
     #Calculating position vector in perifocal coordinates
     r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([[np.cos(theta)], [np.sin(theta)], [0]])
     #Calculating velocity vector in perifocal coordinates
