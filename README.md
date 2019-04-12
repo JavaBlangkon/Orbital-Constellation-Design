@@ -14,3 +14,5 @@ perturbationPlotTrial.py is the same method as toolUtilizationExample.py but now
 rateOfChangePerturbation.py is a method to evaluate the rate of change of each classical orbital elements using basic formula of mean orbital elements and compare it with the graph plotted of each classical orbital elements and analyze it using linear regression
 
 coverageBelt.py is a method to calculate and estimating the coverage belt radius wideness of the satellite, the calculation depends strongly on orbital altitude and elevation angle
+
+groundTrackPlot.py is the method to plot the ground track and orbital shape of the satellite, it includes the process to convert classical orbital elements into spherical coordinates, and defines the longitude and latitude of the satellite
