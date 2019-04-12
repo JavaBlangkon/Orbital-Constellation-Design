@@ -5,6 +5,7 @@
 
 
 import numpy as np
+import math
 
 #G_const for gravitational constant, ME for mass of earth, RE for radius of earth
 G_const = 6.67408 * 10**(-11)
@@ -114,7 +115,7 @@ def sv2coe(r_vec, v_vec):
     T = T / 3600
     #Calculating semi-latus rectum
     p = a * (1 - e**2)
-    return [a, i, omega_capt, e, omega_case, theta, h, T, n, p]
+    return [a, i, omega_capt, e, omega_case, theta, h, T, n, p, r]
 
 # defining function coe2sv(h, i, omega_capt, e, omega_case, theta) for transforming state vector to classical orbital elements
 # in the following definition of function sv2coe, sv is a state vector and coe is classical orbital elements
@@ -156,8 +157,15 @@ def coe2sv(a, i, omega_capt, e, omega_case, theta):
     #Transforming perifocal position and velocity to geocentric frame
     r_geo = np.dot(Q_geo, r_peri)
     v_geo = np.dot(Q_geo, v_peri)
-    
     return [r_peri, v_peri, Q_geo, r_geo, v_geo]
+
+def sphericalCoor(r_vec):
+    r = np.sqrt(np.dot(r_vec, r_vec))
+    latitude = np.arcsin(r_vec[2] / r)
+    latitude *= 180/np.pi
+    longitude = np.arctan2(r_vec[1], r_vec[0])
+    longitude *= 180/np.pi
+    return [r, longitude, latitude]
 
 from scipy.integrate import odeint
 
