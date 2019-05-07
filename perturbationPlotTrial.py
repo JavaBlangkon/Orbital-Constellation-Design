@@ -43,9 +43,36 @@ y = solution1[:, 1]
 plt.plot(x, y, '.')
 plt.axis('equal')
 
+# In[17]:
 
-# In[19]:
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import numpy as np
 
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.set_aspect('equal')
+
+X = solution1[:,0]
+Y = solution1[:,1]
+Z = solution1[:,2]
+
+plot = ax.plot(X, Y, Z, markersize=0.5)
+
+max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
+
+mid_x = (X.max()+X.min()) * 0.5
+mid_y = (Y.max()+Y.min()) * 0.5
+mid_z = (Z.max()+Z.min()) * 0.5
+ax.set_xlim(mid_x - max_range, mid_x + max_range)
+ax.set_ylim(mid_y - max_range, mid_y + max_range)
+ax.set_zlim(mid_z - max_range, mid_z + max_range)
+
+#plt.savefig('coba3D.pdf', dpi=600)
+plt.show()
+
+# In[29]:
 
 import matplotlib.pyplot as plt
 
