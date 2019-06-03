@@ -140,9 +140,9 @@ def sv2coe(r_vec, v_vec):
 def coe2sv(a, i, omega_capt, e, omega_case, theta):
     h = np.sqrt(a * miu * (1 - e**2))
     #Calculating position vector in perifocal coordinates
-    r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([[np.cos(theta)], [np.sin(theta)], [0]])
+    r_peri = (h**2 / miu) * (1 / (1 + e * np.cos(theta))) * np.array([np.cos(theta), np.sin(theta), 0])
     #Calculating velocity vector in perifocal coordinates
-    v_peri = (miu / h) * np.array([[-np.sin(theta)], [e+np.cos(theta)], [0]])
+    v_peri = (miu / h) * np.array([-np.sin(theta), e+np.cos(theta), 0])
     #Calculating matrix Q_geo transformation from perifocal to geocentric equatorial coordinates
     A = (np.cos(omega_capt) * np.cos(omega_case) - np.sin(omega_capt) * np.sin(omega_case) * np.cos(i))
     B = (-np.cos(omega_capt) * np.sin(omega_case) - np.sin(omega_capt) * np.cos(i) * np.cos(omega_case))
@@ -159,6 +159,17 @@ def coe2sv(a, i, omega_capt, e, omega_case, theta):
     v_geo = np.dot(Q_geo, v_peri)
     return [r_peri, v_peri, Q_geo, r_geo, v_geo]
 
+# defining function sphericalCoor(r_vec) for finding the longitude and latitude coordinate positions of the satellite
+# the input element of the function sphericalCoor that need to be defined consists of:
+#   r_vec = vector position of the satellite (in km)
+# 
+# the possible output of this function are as follows:
+#   r = size of the radius of the satellite posisiton (in km)
+#   longitude = the longitude coordinate of the satellite (in degree)
+#   latitude = the latitude coordinate of the satellite (in degree)
+# all the output will be in form of output array
+# The output of the function needs to be recalled as an array function of 
+# [lists of desired output] = sphericalCoor(r_vec)
 def sphericalCoor(r_vec):
     r = np.sqrt(np.dot(r_vec, r_vec))
     latitude = np.arcsin(r_vec[2] / r)
@@ -237,6 +248,18 @@ def F1(s,t):
     r = (s[0]**2 + s[1]**2 + s[2]**2)**(1/2)
     a = -miu*s[0]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[0]/r**5))
     b = -miu*s[1]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[1]/r**5))
+    c = -miu*s[2]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((3 - 5*(s[2]**2/r**2))*(s[2]/r**5))
+    return [s[3],s[4], s[5], a, b, c]
+
+# In the following definition of orbit propagator derivative function F2 including the Perturbation Accelerations due to J2 and Atmoshperic Drag,
+# The complete explanation will be the same as the function F1
+def F2(s,t):
+    Pt = (3/2)*(miu*J2*(RE**2))
+    v = (s[3]**2 + s[4]**2 + s[5]**2)
+    Fd = -0.5*1.454*2.7*0.15*v*10**(-13)
+    r = (s[0]**2 + s[1]**2 + s[2]**2)**(1/2)
+    a = -miu*s[0]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[0]/r**5)) + Fd
+    b = -miu*s[1]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((1 - 5*(s[2]**2/r**2))*(s[1]/r**5)) + Fd
     c = -miu*s[2]/(s[0]**2 + s[1]**2 + s[2]**2)**(3/2) - Pt * ((3 - 5*(s[2]**2/r**2))*(s[2]/r**5))
     return [s[3],s[4], s[5], a, b, c]
 
